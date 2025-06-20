@@ -115,6 +115,13 @@ NEXT_PUBLIC_API_URL=https://your-new-backend-url.com
    - A status message indicating the backend is connected
    - The message from the backend: "You've successfully integrated the backend!"
    - The current backend URL being used
+  
+## Branching Strategy
+
+- `main`: Production-ready code
+- `develop`: Integration of features
+- `feature/*`: Individual features or tasks
+
 
 ## API Endpoints
 
