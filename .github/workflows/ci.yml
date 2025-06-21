@@ -34,9 +34,9 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run backend tests
-      working-directory: backend
       run: |
-        PYTHONPATH=$PWD pytest
+        cd backend
+        PYTHONPATH=./app pytest
 
     - name: Install frontend dependencies
       run: |
