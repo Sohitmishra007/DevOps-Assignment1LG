@@ -1,14 +1,2 @@
-# Python
-__pycache__/
-*.pyc
-backend/venv/
-
-# Node.js
-frontend/node_modules/
-frontend/.next/
-
-# IDE/editor
-*.swp
-*.log
-.DS_Store
-
+node_modules/
+.next/
