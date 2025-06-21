@@ -130,3 +130,13 @@ NEXT_PUBLIC_API_URL=https://your-new-backend-url.com
 
 - `GET /api/message`: Get the integration message
   - Returns: `{"message": "You've successfully integrated the backend!"}`
+
+## 🚀 Run the Project using Docker Compose
+
+### Prerequisites
+- Docker and Docker Compose installed
+
+### Run the full stack
+```bash
+docker-compose up --build
+
