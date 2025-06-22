@@ -2,33 +2,17 @@ name: CI Pipeline
 
 on:
   push:
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    branches: [ develop, feature/** ]
-  pull_request:
-    branches: [ main ]
-=======
->>>>>>> feature/ci-pipeline
     branches:
       - develop
-      - feature/**
+      - feature/** # Catches branches like feature/my-new-feature
   pull_request:
     branches:
       - main
-<<<<<<< HEAD
-=======
->>>>>>> 9b0ad7e257c8a7a075c4dab0a3aba57ec30bbcd7
->>>>>>> feature/ci-pipeline
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> feature/ci-pipeline
     services:
       postgres:
         image: postgres:13
@@ -44,11 +28,6 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 9b0ad7e257c8a7a075c4dab0a3aba57ec30bbcd7
->>>>>>> feature/ci-pipeline
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -56,29 +35,16 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-<<<<<<< HEAD
           python-version: '3.12' # Ensure this matches your project's Python version
-=======
-<<<<<<< HEAD
-          python-version: '3.12'
-=======
-          python-version: '3.10'
->>>>>>> feature/ci-pipeline
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-<<<<<<< HEAD
           node-version: '18' # Ensure this matches your project's Node.js version
-=======
-          node-version: '18'
->>>>>>> 9b0ad7e257c8a7a075c4dab0a3aba57ec30bbcd7
->>>>>>> feature/ci-pipeline
 
       - name: Install backend dependencies
         run: |
           cd backend
-<<<<<<< HEAD
           pip install -r requirements.txt
           # Explicitly install and pin versions of testing frameworks and dependencies
           # to ensure compatibility and resolve the TypeError with TestClient
@@ -97,51 +63,13 @@ jobs:
         run: |
           cd backend # Change into the backend directory before running pytest
           pytest
-=======
-<<<<<<< HEAD
-          python -m venv venv
-          source venv/bin/activate
-=======
-          python -m pip install --upgrade pip
->>>>>>> 9b0ad7e257c8a7a075c4dab0a3aba57ec30bbcd7
-          pip install -r requirements.txt
-
-      - name: Run backend tests
-        run: |
-          cd backend
-<<<<<<< HEAD
-          source venv/bin/activate
-          pytest tests/
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-=======
-          PYTHONPATH=. pytest
->>>>>>> 9b0ad7e257c8a7a075c4dab0a3aba57ec30bbcd7
->>>>>>> feature/ci-pipeline
 
       - name: Install frontend dependencies
         run: |
           cd frontend
           npm install
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> feature/ci-pipeline
       - name: Run frontend build (to validate)
         run: |
           cd frontend
           npm run build
-<<<<<<< HEAD
-=======
-=======
-      - name: Build frontend
-        run: |
-          cd frontend
-          npm run build
-
->>>>>>> 9b0ad7e257c8a7a075c4dab0a3aba57ec30bbcd7
->>>>>>> feature/ci-pipeline
