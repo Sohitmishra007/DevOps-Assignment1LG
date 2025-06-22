@@ -35,30 +35,33 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: '3.12' # Ensure this matches your project's Python version
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '18' # Ensure this matches your project's Node.js version
 
       - name: Install backend dependencies
         run: |
           cd backend
           pip install -r requirements.txt
-          # Pin specific versions of testing dependencies and frameworks for compatibility
-          pip install pytest==8.4.1 # Keep this as it's the version pytest itself found
-          pip install httpx==0.24.0 # Known stable version compatible with older Starlette
-          pip install starlette==0.27.0 # Pin Starlette
-          pip install fastapi==0.95.0 # Pin FastAPI
-          # You might also need uvicorn for running the app, but not strictly for testing
+          # Explicitly install and pin versions of testing frameworks and dependencies
+          # to ensure compatibility and resolve the TypeError with TestClient
+          pip install pytest==8.4.1
+          pip install httpx==0.24.0
+          pip install starlette==0.27.0
+          pip install fastapi==0.95.0
+          # Add any other core backend dependencies here if they are not in requirements.txt
+          # For example, uvicorn might be needed to run the app, but not necessarily for tests
           # pip install uvicorn
 
       - name: Run backend tests
-        env: # Use 'env' context for environment variables, often cleaner than 'export'
-          PYTHONPATH: ${{ github.workspace }}/backend # Absolute path is more robust
+        env:
+          # Set PYTHONPATH to allow Python to find the 'app' module
+          PYTHONPATH: ${{ github.workspace }}/backend
         run: |
-          cd backend # Change directory for pytest
+          cd backend # Change into the backend directory before running pytest
           pytest
 
       - name: Install frontend dependencies
