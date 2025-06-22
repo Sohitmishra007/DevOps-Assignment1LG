@@ -153,3 +153,19 @@ This folder contains sample Terraform code to demonstrate infrastructure as code
 
 These templates are representative only and not linked to a remote state file.
 
+## Contents
+
+- `main.tf`: ECS cluster, task definition, and Fargate service for frontend
+- `alb.tf`: Application Load Balancer, target group, listener
+- `vpc.tf`: Example VPC and subnets
+- `variables.tf`: Terraform input variables
+- `outputs.tf`: Useful outputs after provisioning
+
+These files are **not connected to a remote backend or state file**.
+
+## Usage (Optional Demo Only)
+
+```bash
+terraform init
+terraform plan
+terraform apply
