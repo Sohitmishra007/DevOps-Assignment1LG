@@ -46,8 +46,8 @@ jobs:
         run: |
           cd backend
           pip install -r requirements.txt
-          # Explicitly install pytest to ensure it's available for tests
-          pip install pytest
+          # Explicitly install pytest and httpx
+          pip install pytest httpx # <--- ADDED httpx HERE
 
       - name: Run backend tests
         run: |
