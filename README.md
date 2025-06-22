@@ -139,4 +139,17 @@ NEXT_PUBLIC_API_URL=https://your-new-backend-url.com
 ### Run the full stack
 ```bash
 docker-compose up --build
+# Terraform IaC Overview
+
+This folder contains sample Terraform code to demonstrate infrastructure as code (IaC) for the assignment.
+
+> Note: The actual infrastructure was provisioned manually using AWS Console and AWS CLI as per assignment requirements.
+
+## Structure
+- `main.tf`: Defines ECS cluster, task definition, and Fargate services
+- `alb.tf`: Application Load Balancer, target group, listener
+- `vpc.tf`: VPC and subnet example
+- `iam.tf`: ECS task IAM role
+
+These templates are representative only and not linked to a remote state file.
 
