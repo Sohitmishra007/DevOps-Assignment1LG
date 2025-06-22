@@ -46,18 +46,20 @@ jobs:
         run: |
           cd backend
           pip install -r requirements.txt
-          pip install pytest httpx
+          # Pin specific versions of testing dependencies and frameworks for compatibility
+          pip install pytest==8.4.1 # Keep this as it's the version pytest itself found
+          pip install httpx==0.24.0 # Known stable version compatible with older Starlette
+          pip install starlette==0.27.0 # Pin Starlette
+          pip install fastapi==0.95.0 # Pin FastAPI
+          # You might also need uvicorn for running the app, but not strictly for testing
+          # pip install uvicorn
 
       - name: Run backend tests
-        # Add PYTHONPATH to help Python find the 'app' module
+        env: # Use 'env' context for environment variables, often cleaner than 'export'
+          PYTHONPATH: ${{ github.workspace }}/backend # Absolute path is more robust
         run: |
-          cd backend
-          export PYTHONPATH=$(pwd) # Adds the current directory (backend) to PYTHONPATH
+          cd backend # Change directory for pytest
           pytest
-        # The above 'export PYTHONPATH=$(pwd)' works because 'pwd' inside
-        # the 'backend' directory will be /home/runner/work/DevOps-Assignment1LG/DevOps-Assignment1LG/backend
-        # which is the parent of 'app'.
-        # This allows 'from app.main import app' to resolve correctly.
 
       - name: Install frontend dependencies
         run: |
