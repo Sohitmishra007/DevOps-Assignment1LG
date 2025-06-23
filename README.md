@@ -1,171 +1,71 @@
-# DevOps Assignment
+# DevOps Assignment 🚀
 
-This project consists of a FastAPI backend and a Next.js frontend that communicates with the backend.
+This project demonstrates end-to-end DevOps using a 2-tier application deployed on AWS using Terraform, Docker, CI/CD pipelines, CloudWatch, IAM, and ALB for load balancing.
 
-## Project Structure
+---
 
-```
-.
-├── backend/               # FastAPI backend
-│   ├── app/
-│   │   └── main.py       # Main FastAPI application
-│   └── requirements.txt    # Python dependencies
-└── frontend/              # Next.js frontend
-    ├── pages/
-    │   └── index.js     # Main page
-    ├── public/            # Static files
-    └── package.json       # Node.js dependencies
-```
+## 📁 Project Structure
 
-## Prerequisites
+- `backend/` - Python FastAPI app with /health and /api/message
+- `frontend/` - Next.js app calling backend APIs
+- `terraform/` - Infrastructure-as-code for AWS (ECS, ALB, VPC, IAM)
+- `.github/workflows/` - CI/CD with GitHub Actions
+- `docker-compose.yml` - For local dev and testing
 
-- Python 3.8+
-- Node.js 16+
-- npm or yarn
+---
 
-## Backend Setup
+## ✅ Features Implemented
 
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
+- [x] Git-based workflow with `main`, `develop`, and `feature/*`
+- [x] Backend & Frontend containerized using Docker (multi-stage builds)
+- [x] CI/CD pipeline with GitHub Actions
+- [x] Terraform to provision ECS, ALB, ECR, Secrets Manager, IAM
+- [x] Monitoring via CloudWatch Dashboards & Alarms
+- [x] Load balancing with ECS Fargate + ALB
 
-2. Create a virtual environment (recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: .\venv\Scripts\activate
-   ```
+---
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 🚀 Deployment URLs
 
-4. Run the FastAPI server:
-   ```bash
-   uvicorn app.main:app --reload --port 8000
-   ```
+- **Frontend:** http://app-load-balancer-783029873.us-east-1.elb.amazonaws.com
+- **Backend:** http://app-load-balancer-783029873.us-east-1.elb.amazonaws.com/api/message
 
-   The backend will be available at `http://localhost:8000`
+---
 
-## Frontend Setup
+---
 
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
+## 🧪 CI/CD Logs
 
-2. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn
-   ```
+CI builds, tests, and deploys on push to `develop` and merge to `main`.
 
-3. Configure the backend URL (if different from default):
-   - Open `.env.local`
-   - Update `NEXT_PUBLIC_API_URL` with your backend URL
-   - Example: `NEXT_PUBLIC_API_URL=https://your-backend-url.com`
+- ✅ Unit tests via `pytest`
+- ✅ Frontend tests using build validation
+- ✅ Docker images tagged with commit SHA and pushed to ECR
 
-4. Run the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+---
 
-   The frontend will be available at `http://localhost:3000`
+## 🔒 Security & IAM
 
-## Changing the Backend URL
+- Fine-grained IAM roles for tasks
+- Secrets stored and accessed securely from AWS Secrets Manager
 
-To change the backend URL that the frontend connects to:
+---
 
-1. Open the `.env.local` file in the frontend directory
-2. Update the `NEXT_PUBLIC_API_URL` variable with your new backend URL
-3. Save the file
-4. Restart the Next.js development server for changes to take effect
+## 📊 Monitoring
 
-Example:
-```
-NEXT_PUBLIC_API_URL=https://your-new-backend-url.com
-```
+- CloudWatch Dashboards for:
+  - CPUUtilization
+  - MemoryUtilization
+  - RequestCount
+- Alarm for CPU > 70% for 5 minutes
 
-## For deployment:
-   ```bash
-   npm run build
-   # or
-   yarn build
-   ```
+---
 
-   AND
-
-   ```bash
-   npm run start
-   # or
-   yarn start
-   ```
-
-   The frontend will be available at `http://localhost:3000`
-
-## Testing the Integration
-
-1. Ensure both backend and frontend servers are running
-2. Open the frontend in your browser (default: http://localhost:3000)
-3. If everything is working correctly, you should see:
-   - A status message indicating the backend is connected
-   - The message from the backend: "You've successfully integrated the backend!"
-   - The current backend URL being used
-  
-## Branching Strategy
-
-- `main`: Production-ready code
-- `develop`: Integration of features
-- `feature/*`: Individual features or tasks
-
-
-## API Endpoints
-
-- `GET /api/health`: Health check endpoint
-  - Returns: `{"status": "healthy", "message": "Backend is running successfully"}`
-
-- `GET /api/message`: Get the integration message
-  - Returns: `{"message": "You've successfully integrated the backend!"}`
-
-## 🚀 Run the Project using Docker Compose
-
-### Prerequisites
-- Docker and Docker Compose installed
-
-### Run the full stack
-```bash
-docker-compose up --build
-# Terraform IaC Overview
-
-This folder contains sample Terraform code to demonstrate infrastructure as code (IaC) for the assignment.
-
-> Note: The actual infrastructure was provisioned manually using AWS Console and AWS CLI as per assignment requirements.
-
-## Structure
-- `main.tf`: Defines ECS cluster, task definition, and Fargate services
-- `alb.tf`: Application Load Balancer, target group, listener
-- `vpc.tf`: VPC and subnet example
-- `iam.tf`: ECS task IAM role
-
-These templates are representative only and not linked to a remote state file.
-
-## Contents
-
-- `main.tf`: ECS cluster, task definition, and Fargate service for frontend
-- `alb.tf`: Application Load Balancer, target group, listener
-- `vpc.tf`: Example VPC and subnets
-- `variables.tf`: Terraform input variables
-- `outputs.tf`: Useful outputs after provisioning
-
-These files are **not connected to a remote backend or state file**.
-
-## Usage (Optional Demo Only)
+## 📦 How to Run Locally
 
 ```bash
-terraform init
-terraform plan
-terraform apply
+# Backend
+cd backend && uvicorn main:app --reload
+
+# Frontend
+cd frontend && npm install && npm run dev
